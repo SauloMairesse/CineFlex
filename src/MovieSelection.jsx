@@ -3,7 +3,6 @@ export default function MovieSelection(){
         <>
             <header>
                 <h1>CINEFLEX</h1>
-                <h2>Selecione o filme</h2>
             </header>
             <section>
                 <div class="img">filmes</div>

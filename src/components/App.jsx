@@ -5,9 +5,14 @@ import DataSelection from "./DataSelection";
 import styled from "styled-components"
 import "./styles/reset.css"
 
-export default function App(){
 
+
+
+export default function App(){
+    let movieName;
     const [nextScreen, setNextScreen] = React.useState(0)
+
+
 
     if(nextScreen === 0){
         return(
@@ -19,11 +24,11 @@ export default function App(){
 
     if(nextScreen === 1){
         return(
-            <>
+            <Main>
                 <Header/>
-                {/* <DataSelection setNextScreen={() => setNextScreen(2)}/>
-                <Footer movieName={}/> */}
-            </>)}
+                <DataSelection/>
+                {/* <Footer/> */}
+            </Main>)}
 
     // if(nextScreen === 2){
     //     return(

@@ -1,8 +1,8 @@
 import React from "react";
-import "./styles/style.css"
-import styled from "styled-components"
 import axios from 'axios';
 import { useEffect } from "react";
+import styled from "styled-components"
+import "./styles/style.css"
 
 function MovieSelection(props){
     
@@ -11,13 +11,9 @@ function MovieSelection(props){
     useEffect( () => {
             const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies');
             promise.then( (response) => {
-                setListaFilmes(response.data)
-                // console.log('Atualizou Lista De filmes')
-                console.log(response.data)
-            } )
+                setListaFilmes(response.data)})
 
-            promise.catch(() => console.log("deu erro") )}
-        ,[]);
+            promise.catch(() => console.log("deu erro")) }  ,[] );
 
         if(listaFilmes.length !== 0){
             return(

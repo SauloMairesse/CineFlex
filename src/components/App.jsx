@@ -42,4 +42,6 @@ export default function App(){
     //     )}
 }
 
-con
+const Main = styled.main`
+    background-color: blue;
+    `;

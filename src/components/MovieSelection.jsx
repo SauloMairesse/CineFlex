@@ -1,57 +1,74 @@
+import React from "react";
 import "./styles/style.css"
 import styled from "styled-components"
 import axios from 'axios';
+import { useEffect } from "react";
 
 function MovieSelection(props){
-
     
+    const [listaFilmes, setListaFilmes] = React.useState([])
+    
+    useEffect( () => {
+            const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies');
+            promise.then( (response) => {
+                setListaFilmes(response.data)
+                // console.log('Atualizou Lista De filmes')
+                console.log(response.data)
+            } )
+
+            promise.catch(() => console.log("deu erro") )}
+        ,[]);
+
+        if(listaFilmes.length !== 0){
+            return(
+                <Section>
+                    <h2>Selecione o filme</h2>
+                    <div>
+                        {listaFilmes.map( filme => <Img setNextScreen={props.setNextScreen} postMovie={filme.posterURL} /> )}
+                    </div>
+                </Section>)
+        }
+        else{
+            return (
+                <div>.............</div>
+            )
+        }
+}
+
+function Img(props){
     return(
-        <Section>
-            <H2>Selecione o filme</H2>
-            <Div className="movie-selection">
-                <div onClick = { props.setNextScreen } className="img">filmes</div>
-                <div className="img">filmes</div>
-            </Div>
-        </Section>)}
+        <img onClick={props.setNextScreen} src={props.postMovie}/>)
+}
 
 const Section = styled.section`
         display: flex;
         flex-direction: column;
-        width: 90%;
+        align-items: center;
+        width: 375px;
         height: 100%;
-        background-color: blue;
-        margin: 0 10% 0 10%;`;
 
-const H2 = styled.h2`
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 28px;
-        letter-spacing: 0.04em;
-        text-align: center;
-        color: #293845;
-        margin: 40px 0 40px 0;`;
-
-const Div = styled.div`
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    width: 130px;
-    height: 195px;
-    background-color: orange;`;
-
-
-// const Section = styled.section`
-//         display: flex;
-//         flex-wrap: nowrap;
-//         width: 375px;
-//         justify-content: space-between;
-//         padding: 0 28px 0 28px;
-//     .img{ 
-//         height: 193px;
-//         width: 129px;
-//         background-color: burlywood;
-//         margin-bottom: 27px;}`;
+        h2{
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: 0.04em;
+            text-align: center;
+            color: #293845;
+            margin: 40px 0 40px 0;
+        }
+        div{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+        }
+        img{
+            object-fit: cover;
+            width: 130px;
+            height: 195px;
+            margin-bottom: 40px;
+            background-color: orange}`;
 
 export default MovieSelection

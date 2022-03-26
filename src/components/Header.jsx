@@ -2,24 +2,21 @@ import styled from "styled-components"
 
 export default function Header(){
   return( 
-    <Div>
-        <h1>CINEFLEX</h1>
-    </Div>)  
+        <H1>CINEFLEX</H1>
+        )  
 }
 
-const Div = styled.div`
+const H1 = styled.h1`
       display: flex;
       justify-content: center;
+      align-items: center;
       width: 100%;
+      height: 60px;
+      font-family: 'Roboto', sans-serif;
+      font-style: normal;
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 40px;
+      letter-spacing: 0em;
       background: #C3CFD9;
-
-      h1{
-        font-family: 'Roboto', sans-serif;
-        font-size: 34px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 40px;
-        letter-spacing: 0em;
-        text-align: center;
-        color: #E8833A;
-      }`;
+      color: #E8833A;`;

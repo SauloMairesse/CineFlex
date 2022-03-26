@@ -3,6 +3,7 @@ import Header from "./Header";
 import MovieSelection from "./MovieSelection";
 import DataSelection from "./DataSelection";
 import styled from "styled-components"
+import "./styles/reset.css"
 
 export default function App(){
 
@@ -20,18 +21,18 @@ export default function App(){
         return(
             <>
                 <Header/>
-                {/* <DataSelection setNextScreen={() => setNextScreen(2)}/> */}
-                {/* <Footer movieName={}/> */}
+                {/* <DataSelection setNextScreen={() => setNextScreen(2)}/>
+                <Footer movieName={}/> */}
             </>)}
 
-    if(nextScreen === 2){
-        return(
-            <>
-                <Header/>
-                {/* <ChairSelection/>
-                <Footer movieName={} dataMovie={} /> */}
-            </>
-        )}
+    // if(nextScreen === 2){
+    //     return(
+    //         <>
+    //             <Header/>
+    //             <ChairSelection/>
+    //             <Footer movieName={} dataMovie={} />
+    //         </>
+    //     )}
 
     // if( ){
     //     return(
@@ -45,5 +46,7 @@ export default function App(){
 const Main = styled.main`
     display: flex;
     flex-direction: column;
-    background-color: blue;
+    align-items: center;
+    width: 100%;
+    /* background-color: blue; */
     `;

@@ -3,6 +3,8 @@ import styled from "styled-components"
 import axios from 'axios';
 
 function MovieSelection(props){
+
+    
     return(
         <Section>
             <H2>Selecione o filme</H2>
@@ -37,7 +39,7 @@ const Div = styled.div`
     justify-content: space-between;
     width: 130px;
     height: 195px;
-    background-color: orange;`
+    background-color: orange;`;
 
 
 // const Section = styled.section`
@@ -52,4 +54,4 @@ const Div = styled.div`
 //         background-color: burlywood;
 //         margin-bottom: 27px;}`;
 
-export default MovieSelection;
+export default MovieSelection

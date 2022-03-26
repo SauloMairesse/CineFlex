@@ -43,5 +43,7 @@ export default function App(){
 }
 
 const Main = styled.main`
+    display: flex;
+    flex-direction: column;
     background-color: blue;
     `;

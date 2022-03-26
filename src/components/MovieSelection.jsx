@@ -1,12 +1,11 @@
 import "./styles/style.css"
 import styled from "styled-components"
+import axios from 'axios';
 
 function MovieSelection(props){
     return(
         <Section>
-            <Div>
-                <h2>Selecione o filme</h2>
-            </Div>
+            <H2>Selecione o filme</H2>
             <Div className="movie-selection">
                 <div onClick = { props.setNextScreen } className="img">filmes</div>
                 <div className="img">filmes</div>
@@ -21,11 +20,25 @@ const Section = styled.section`
         background-color: blue;
         margin: 0 10% 0 10%;`;
 
+const H2 = styled.h2`
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0.04em;
+        text-align: center;
+        color: #293845;
+        margin: 40px 0 40px 0;`;
+
 const Div = styled.div`
     display: flex;
-    justify-content: center;
-    margin-top: 8px;
-    margin-bottom: 8px;`;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 130px;
+    height: 195px;
+    background-color: orange;`
+
 
 // const Section = styled.section`
 //         display: flex;

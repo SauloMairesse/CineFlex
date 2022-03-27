@@ -44,11 +44,11 @@ function FilmSection(props){
             </div>)
 }
 
-function Article(props){
+// function Article(props){
 
-    return(
-        <article> {props.showtimes} </article>   
-        )}
+//     return(
+//         <article> {props.showtimes} </article>   
+//         )}
 
 const Section = styled.section`
         display: flex;

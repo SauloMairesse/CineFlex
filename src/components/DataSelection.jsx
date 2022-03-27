@@ -8,7 +8,7 @@ export default function DataSelection(props){
 
     const [arrayMovieSections, setArrayMovieSections] = React.useState([])
     const [horary, setHorary] = React.useState([])
-    const imagem = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fgshow.globo.com%2Ftudo-mais%2Fpop%2Fnoticia%2Fconfira-cinco-curiosidades-sobre-jim-carrey-astro-do-filme-todo-poderoso.ghtml&psig=AOvVaw1fA0Rkyhoh-k6eFLd3b5-K&ust=1648434234004000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNDU5pye5fYCFQAAAAAdAAAAABAD'
+    
     useEffect( () => {
         const promise  = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/1/showtimes`)
         promise.then( (response) => {
@@ -22,15 +22,14 @@ export default function DataSelection(props){
             <Section>
                     <h2> Selecione o horário </h2>
                     {arrayMovieSections.map( movieSection => <FilmSection   weekday={movieSection.weekday} 
-                                                                            date={movieSection.date} 
-                                                                            showtimes={ movieSection.showtimes}/> )}
+                                                                            date={movieSection.date}
+                                                                            setNextScreen={props.setNextScreen}/> )}
             </Section>) }
 
     else{
         return(
             <div>.................</div>
-        )
-    }
+        )}
 }
 
 function FilmSection(props){
@@ -38,7 +37,9 @@ function FilmSection(props){
             <div className="movie-section">
                 <p> {props.weekday} - {props.date} </p>
                 <div className="hours">
-                    <article> 15:00 </article>
+
+                  <article onClick={props.setNextScreen}> 15:00 </article>
+
                 </div>
             </div>)
 }

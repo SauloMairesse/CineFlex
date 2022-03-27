@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import styled from "styled-components"
 import "./styles/style.css"
 
-function MovieSelection(props){
+
+export default function MovieSelection(props){
     
     const [listaFilmes, setListaFilmes] = React.useState([])
     
@@ -33,8 +34,8 @@ function MovieSelection(props){
 
 function Img(props){
     return(
-        <img onClick={props.setNextScreen} src={props.postMovie}/>)
-}
+        <img onClick={props.setNextScreen} src={props.postMovie}/>
+        )}
 
 const Section = styled.section`
         display: flex;
@@ -66,5 +67,3 @@ const Section = styled.section`
             height: 195px;
             margin-bottom: 40px;
             background-color: orange}`;
-
-export default MovieSelection

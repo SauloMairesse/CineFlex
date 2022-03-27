@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./Header";
+
 import MovieSelection from "./MovieSelection";
 import DataSelection from "./DataSelection";
+import ChairSelection from "./ChairSelection";
+
 import styled from "styled-components"
 import "./styles/reset.css"
-
-
-
 
 export default function App(){
     let movieName;
@@ -26,17 +26,18 @@ export default function App(){
         return(
             <Main>
                 <Header/>
-                <DataSelection/>
+                <DataSelection setNextScreen={ () => setNextScreen(2) }/>
+                {/* <Footer></Footer> */}
             </Main>)}
 
-    // if(nextScreen === 2){
-    //     return(
-    //         <>
-    //             <Header/>
-    //             <ChairSelection/>
-    //             <Footer movieName={} dataMovie={} />
-    //         </>
-    //     )}
+    if(nextScreen === 2){
+        return(
+            <Main>
+                <Header/>
+                <ChairSelection/>
+                {/* <Footer movieName={} dataMovie={} /> */}
+            </Main>
+        )}
 
     // if( ){
     //     return(

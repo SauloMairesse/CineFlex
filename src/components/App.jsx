@@ -27,7 +27,6 @@ export default function App(){
             <Main>
                 <Header/>
                 <DataSelection/>
-                {/* <Footer/> */}
             </Main>)}
 
     // if(nextScreen === 2){

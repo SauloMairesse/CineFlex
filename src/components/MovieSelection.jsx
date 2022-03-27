@@ -13,7 +13,7 @@ function MovieSelection(props){
             promise.then( (response) => {
                 setListaFilmes(response.data)})
 
-            promise.catch(() => console.log("deu erro")) }  ,[] );
+            promise.catch(() => console.log("deu erro")) }  ,[]);
 
         if(listaFilmes.length !== 0){
             return(

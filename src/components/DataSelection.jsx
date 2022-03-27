@@ -4,24 +4,26 @@ import axios from "axios";
 import { useEffect } from "react";
 import "./styles/style.css"
 
-
-
 export default function DataSelection(props){
 
     const [arrayMovieSections, setArrayMovieSections] = React.useState([])
-
+    const [horary, setHorary] = React.useState([])
+    const imagem = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fgshow.globo.com%2Ftudo-mais%2Fpop%2Fnoticia%2Fconfira-cinco-curiosidades-sobre-jim-carrey-astro-do-filme-todo-poderoso.ghtml&psig=AOvVaw1fA0Rkyhoh-k6eFLd3b5-K&ust=1648434234004000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNDU5pye5fYCFQAAAAAdAAAAABAD'
     useEffect( () => {
         const promise  = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/1/showtimes`)
         promise.then( (response) => {
-            setArrayMovieSections(response.data)})
-    
-            promise.catch( () => console.log(' Deu Erro ')) }   ,[] )
+            console.log(response.data.days)
+            setArrayMovieSections(response.data.days)   })
+            
+            promise.catch( () => console.log(' Deu Erro ')) }   ,[])
 
     if (arrayMovieSections.length !== 0){
         return(
             <Section>
                     <h2> Selecione o horário </h2>
-                    {arrayMovieSections.map( secao => <OneMovieSection weekday={secao.weekday} date={secao.date} /> )}
+                    {arrayMovieSections.map( movieSection => <FilmSection   weekday={movieSection.weekday} 
+                                                                            date={movieSection.date} 
+                                                                            showtimes={ movieSection.showtimes}/> )}
             </Section>) }
 
     else{
@@ -29,22 +31,23 @@ export default function DataSelection(props){
             <div>.................</div>
         )
     }
-
 }
 
-function OneMovieSection(props){
+function FilmSection(props){
     return(
             <div className="movie-section">
                 <p> {props.weekday} - {props.date} </p>
                 <div className="hours">
                     <article> 15:00 </article>
-                    <article> 15:00 </article>
-                    <article> 15:00 </article>
-                    <article> 15:00 </article>
-                    <article> 15:00 </article>
                 </div>
             </div>)
 }
+
+function Article(props){
+
+    return(
+        <article> {props.showtimes} </article>   
+        )}
 
 const Section = styled.section`
         display: flex;

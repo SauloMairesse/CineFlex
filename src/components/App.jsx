@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MovieSelection from "./MovieSelection";
 import DataSelection from "./DataSelection";
@@ -12,14 +13,14 @@ export default function App(){
     let movieName;
     const [nextScreen, setNextScreen] = React.useState(0)
 
-
-
     if(nextScreen === 0){
         return(
-            <Main>
-                <Header/>
-                <MovieSelection setNextScreen={() => setNextScreen(1)}/>
-            </Main>
+            <BrowserRouter>
+                <Main>
+                    <Header/>
+                    <MovieSelection setNextScreen={() => setNextScreen(1)}/>
+                </Main>
+            </BrowserRouter>
         )}
 
     if(nextScreen === 1){

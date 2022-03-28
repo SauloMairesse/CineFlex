@@ -51,13 +51,14 @@ function horinhas(showtimes){
     const horasDisponiveis = showtimes; 
     return(
         <>
-            {horasDisponiveis.map( horadisponivel => <Article showtimes={horadisponivel.name}/>)}
+            {horasDisponiveis.map( horadisponivel => <Article   showtimes={horadisponivel.name}
+                                                                setNextScreen={props.setNextScreen}/>)}
         </>)
 }
 
 function Article(props){
     return(
-        <article> {props.showtimes} </article>  )
+        <article onClick={props.setNextScreen}> {props.showtimes} </article>  )
 }
 
 const Section = styled.section`

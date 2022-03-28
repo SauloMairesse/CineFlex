@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import "./styles/style.css"
 import { Link, useParams } from "react-router-dom";
+import Header from "./Header";
 
 
 
@@ -16,20 +17,27 @@ export default function DataSelection(props){
     useEffect( () => {
         const promise  = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
         promise.then( (response) => {
-            setArrayMovieSections(response.data.days)   })
+            console.log(response.data)
+            setArrayMovieSections(response.data)   })
             
             promise.catch( () => console.log(' Deu Erro ')) }   ,[])
 
     if (arrayMovieSections.length !== 0){
         return(
-            <Section>
-                    <h2> Selecione o horário </h2>
-                    {arrayMovieSections.map( movieSection => <FilmSection   weekday={movieSection.weekday} 
-                                                                            date={movieSection.date}
-                                                                            setNextScreen={props.setNextScreen}
-                                                                            arrayTeste={horinhas(movieSection.showtimes,idSessao)}/> )}
-            </Section>) }
-
+            <Main>
+                <Header />
+                <Section>
+                        <h2> Selecione o horário </h2>
+                        {arrayMovieSections.days.map( movieSection => <FilmSection   weekday={movieSection.weekday} 
+                                                                                date={movieSection.date}
+                                                                                setNextScreen={props.setNextScreen}
+                                                                                arrayTeste={horinhas(movieSection.showtimes,idSessao)}/> )}
+                </Section>
+                <Footer>
+                    <img src={arrayMovieSections.posterURL} />
+                    <h3>{arrayMovieSections.title}</h3>
+                </Footer>
+            </Main>) }
     else{
         return(
             <div>.................</div>
@@ -45,7 +53,6 @@ function FilmSection(props){
                 </div>
             </div>)
 }
-
 function horinhas(showtimes,idSessao){
     const horasDisponiveis = showtimes; 
     return(
@@ -53,10 +60,9 @@ function horinhas(showtimes,idSessao){
             {horasDisponiveis.map( horadisponivel => <Link to={`/assentos/${idSessao = horadisponivel.id}`}> <Article   showtimes={horadisponivel.name} /> </Link> )}
         </>)
 }
-
 function Article(props){
     return(
-        <article> {props.showtimes} </article>  )
+        <article> <span>{props.showtimes}</span> </article>  )
 }
 
 const Section = styled.section`
@@ -65,7 +71,7 @@ const Section = styled.section`
         width: 375px;
         height: 100%;
         margin-left: 28px;
-
+        margin-bottom: 117px;
         .movie-section{
             margin-bottom: 30px;
         }
@@ -78,8 +84,7 @@ const Section = styled.section`
             letter-spacing: 0.04em;
             text-align: center;
             color: #293845;
-            margin: 40px 0 40px 0;
-        }   
+            margin: 40px 0 40px 0;        }   
         p{
             font-family: 'Roboto', sans-serif;
             font-size: 20px;
@@ -108,7 +113,38 @@ const Section = styled.section`
             margin-right: 30px ;
             margin-bottom: 10px;
         }
+        span{
+            text-decoration: none;
+        }
         .show-times{
             display: flex;
         }`;
-
+const Footer = styled.footer`
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 117px;
+        padding: 0 0 0 20px ;
+        border-top: 1px solid #9EADBA;
+        background-color: #DFE6ED; 
+        position: fixed;
+        bottom: 0;
+        img{
+            object-fit: cover;
+            width: 48px;
+            height: 72px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+        h3{
+            font-family: 'Roboto', sans-serif;
+            font-size: 26px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 30px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #293845;
+        }`;
+const Main = styled.main``;

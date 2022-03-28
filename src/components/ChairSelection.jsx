@@ -43,6 +43,13 @@ export default function ChairSelection(){
                         </div>
                     </span>
                 </Section>
+                <Footer>
+                    <img src={chairs.movie.posterURL} />
+                    <div>
+                        <h3> {chairs.movie.title} </h3>
+                        <h4> {chairs.day.weekday} - {chairs.name} </h4>
+                    </div>
+                </Footer>
             </Main>
         )
     }
@@ -58,10 +65,6 @@ function Article(props){
     )
 }
 
-function choice(){
-
-}
-
 const Section = styled.section`
         display: flex;
         flex-direction: column;
@@ -69,6 +72,7 @@ const Section = styled.section`
         width: 375px;
         height: 100%;
         background-color: greenyellow;
+        margin-bottom: 117px;
         h2{
             font-family: 'Roboto', sans-serif;
             font-size: 24px;
@@ -130,3 +134,32 @@ const Main = styled.main`
         align-items: center;
         width: 100%;
 `;
+
+const Footer = styled.footer`
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 117px;
+        padding: 0 0 0 20px ;
+        border-top: 1px solid #9EADBA;
+        background-color: #DFE6ED;
+        position: fixed;
+        bottom: 0;
+        img{
+            object-fit: cover;
+            width: 48px;
+            height: 72px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+        h3{
+            font-family: 'Roboto', sans-serif;
+            font-size: 26px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 30px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #293845;
+        }`;

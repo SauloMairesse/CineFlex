@@ -16,6 +16,7 @@ export default function MovieSelection(props){
     useEffect( () => {
             const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies');
             promise.then( (response) => {
+                console.log(response.data)
                 setListaFilmes(response.data)})
 
             promise.catch(() => console.log("deu erro")) }  ,[]);
@@ -80,5 +81,4 @@ const Main = styled.main`
         flex-direction: column;
         align-items: center;
         width: 100%;
-        /* background-color: blue; */
 `;

@@ -7,7 +7,7 @@ import "./styles/style.css"
 export default function DataSelection(props){
 
     const [arrayMovieSections, setArrayMovieSections] = React.useState([])
-    const [horary, setHorary] = React.useState([])
+    // const [horary, setHorary] = React.useState([])
     
     useEffect( () => {
         const promise  = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/1/showtimes`)
@@ -23,7 +23,8 @@ export default function DataSelection(props){
                     <h2> Selecione o horário </h2>
                     {arrayMovieSections.map( movieSection => <FilmSection   weekday={movieSection.weekday} 
                                                                             date={movieSection.date}
-                                                                            setNextScreen={props.setNextScreen}/> )}
+                                                                            setNextScreen={props.setNextScreen}
+                                                                            arrayTeste={horinhas(movieSection.showtimes)}/> )}
             </Section>) }
 
     else{
@@ -32,23 +33,32 @@ export default function DataSelection(props){
         )}
 }
 
+
 function FilmSection(props){
     return(
-            <div className="movie-section">
+        <div className="movie-section">
                 <p> {props.weekday} - {props.date} </p>
-                <div className="hours">
 
-                  <article onClick={props.setNextScreen}> 15:00 </article>
-
+                <div className="show-times">
+                    {props.arrayTeste}
+                    {/* {props.arrayTeste} */}
+                    {/* {arrayShowTimes.map( showtime => <Article showtimes={showtime.name}/>)} */}
                 </div>
             </div>)
 }
 
-// function Article(props){
+function horinhas(showtimes){
+    const horasDisponiveis = showtimes; 
+    return(
+        <>
+            {horasDisponiveis.map( horadisponivel => <Article showtimes={horadisponivel.name}/>)}
+        </>)
+}
 
-//     return(
-//         <article> {props.showtimes} </article>   
-//         )}
+function Article(props){
+    return(
+        <article> {props.showtimes} </article>  )
+}
 
 const Section = styled.section`
         display: flex;
@@ -98,5 +108,8 @@ const Section = styled.section`
             background-color: #E8833A;
             margin-right: 30px ;
             margin-bottom: 10px;
+        }
+        .show-times{
+            display: flex;
         }`;
 

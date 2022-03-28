@@ -1,14 +1,18 @@
 import React from "react";
 import axios from 'axios';
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import styled from "styled-components"
 import "./styles/style.css"
 
+import Header from "./Header";
 
 export default function MovieSelection(props){
     
     const [listaFilmes, setListaFilmes] = React.useState([])
-    
+    let idFilme;
+
     useEffect( () => {
             const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies');
             promise.then( (response) => {
@@ -18,12 +22,15 @@ export default function MovieSelection(props){
 
         if(listaFilmes.length !== 0){
             return(
-                <Section>
-                    <h2>Selecione o filme</h2>
-                    <div>
-                        {listaFilmes.map( filme => <Img setNextScreen={props.setNextScreen} postMovie={filme.posterURL} /> )}
-                    </div>
-                </Section>)
+                <Main>
+                    <Header/>
+                    <Section>
+                        <h2>Selecione o filme</h2>
+                        <div>
+                            {listaFilmes.map( filme => <Link to={`/section/${idFilme=filme.id}`}> <Img   postMovie={filme.posterURL}/> </Link> )}
+                        </div>
+                    </Section>
+                </Main>)
         }
         else{
             return (
@@ -34,7 +41,7 @@ export default function MovieSelection(props){
 
 function Img(props){
     return(
-        <img onClick={props.setNextScreen} src={props.postMovie}/>
+        <img src={props.postMovie}/>
         )}
 
 const Section = styled.section`
@@ -67,3 +74,11 @@ const Section = styled.section`
             height: 195px;
             margin-bottom: 40px;
             background-color: orange}`;
+
+const Main = styled.main`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        /* background-color: blue; */
+`;

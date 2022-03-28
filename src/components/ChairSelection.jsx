@@ -3,96 +3,63 @@ import axios from 'axios';
 import { useEffect } from "react";
 import styled from "styled-components"
 import "./styles/style.css"
+import Header from "./Header";
+import { Link, useParams } from "react-router-dom";
 
 export default function ChairSelection(){
 
+    const {idSessao} = useParams()
     const [chairs, setChairs] = React.useState([])
 
     useEffect( () => {
-        const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/showtimes/161/seats');
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
         promise.then( (response) => {
+            console.log(response.data)
             setChairs(response.data)})
         promise.catch(() => console.log("deu erro")) }  ,[]);
 
-    if(chairs !== 0){
+    if(chairs.length !== 0){
         return (
-            <Section>
-                <h2> Selecione o(s) assento(s) </h2>
-                <div className="seats-options">
-                    <article> 01 </article>
-                    <article> 02 </article>
-                    <article> 03 </article>
-                    <article> 04 </article>
-                    <article> 05 </article>
-                    <article> 06 </article>
-                    <article> 07 </article>
-                    <article> 08 </article>
-                    <article> 09 </article>
-                    <article> 10 </article>
-                    <article> 11 </article>
-                    <article> 12 </article>
-                    <article> 13 </article>
-                    <article> 14 </article>
-                    <article> 15 </article>
-                    <article> 16 </article>
-                    <article> 17 </article>
-                    <article> 18 </article>
-                    <article> 19 </article>
-                    <article> 20 </article>
-                    <article> 21 </article>
-                    <article> 22 </article>
-                    <article> 23 </article>
-                    <article> 24 </article>
-                    <article> 25 </article>
-                    <article> 26 </article>
-                    <article> 27 </article>
-                    <article> 28 </article>
-                    <article> 29 </article>
-                    <article> 30 </article>
-                    <article> 31 </article>
-                    <article> 32 </article>
-                    <article> 33 </article>
-                    <article> 34 </article>
-                    <article> 35 </article>
-                    <article> 36 </article>
-                    <article> 37 </article>
-                    <article> 38 </article>
-                    <article> 39 </article>
-                    <article> 40 </article>
-                    <article> 41 </article>
-                    <article> 42 </article>
-                    <article> 43 </article>
-                    <article> 44 </article>
-                    <article> 45 </article>
-                    <article> 46 </article>
-                    <article> 47 </article>
-                    <article> 48 </article>
-                    <article> 49 </article>
-                    <article> 40 </article>
-                    <article> 41 </article>
-                    <article> 42 </article>
-                    <article> 43 </article>
-                    <article> 44 </article>
-                    <article> 45 </article>
-                    <article> 46 </article>
-                    <article> 47 </article>
-                    <article> 48 </article>
-                    <article> 49 </article>
-                    <article> 50 </article>
-                </div>
-                <div className="stata-seat">
+            <Main>
+                <Header/>
+                <Section>
+                    <h2> Selecione o(s) assento(s) </h2>
+                    <div className="seats-options">
+                        {chairs.seats.map( chair => <Article    name={chair.name}
+                                                                isAvailable={`${chair.isAvailable}`}    /> )}
+                    </div>
                     <span className="selected">
-                        <article> </article>
-                        
+                        <div className="example">
+                            <article className="selecionado"> </article>
+                            <p>Selecionado</p>
+                        </div>
+                        <div className="example">
+                            <article className="true"> </article>
+                            <p>Disponivel</p>
+                        </div>
+                        <div className="example">
+                            <article className="false"> </article>
+                            <p>Indisponível</p>
+                        </div>
                     </span>
-                </div>
-            </Section>
+                </Section>
+            </Main>
         )
     }
     else{
         return(
-            <div> Pohaaa</div>
+            <div> .............. </div>
         )}
+}
+
+function Article(props){
+    return(
+        <article className={props.isAvailable}> {props.name} </article>
+    )
+}
+
+function choice(){
+
 }
 
 const Section = styled.section`
@@ -134,5 +101,32 @@ const Section = styled.section`
             font-family: 'Roboto', sans-serif;
             border: 1px solid #808F9D;
             background-color: #C3CFD9;
+        }
+        span{
+            display: flex;
+            justify-content: space-around;
+            width: 375px;
+            /* background-color: #293845; */
+        }
+        .example{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center ;
+        }
+        .selecionado{
+            background-color: #8DD7CF;
+            border: 1px solid #1AAE9E
+        }
+        .false{
+            border: 1px solid #F7C52B;
+            background-color: #FBE192;
         }   
     `;
+
+const Main = styled.main`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+`;

@@ -3,16 +3,19 @@ import styled from "styled-components"
 import axios from "axios";
 import { useEffect } from "react";
 import "./styles/style.css"
+import { Link, useParams } from "react-router-dom";
+
+
 
 export default function DataSelection(props){
 
+    const {idFilme} = useParams()
     const [arrayMovieSections, setArrayMovieSections] = React.useState([])
-    // const [horary, setHorary] = React.useState([])
-    
+    let idSessao = "ID_DA_SESSAO"
+
     useEffect( () => {
-        const promise  = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/1/showtimes`)
+        const promise  = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
         promise.then( (response) => {
-            console.log(response.data.days)
             setArrayMovieSections(response.data.days)   })
             
             promise.catch( () => console.log(' Deu Erro ')) }   ,[])
@@ -24,7 +27,7 @@ export default function DataSelection(props){
                     {arrayMovieSections.map( movieSection => <FilmSection   weekday={movieSection.weekday} 
                                                                             date={movieSection.date}
                                                                             setNextScreen={props.setNextScreen}
-                                                                            arrayTeste={horinhas(movieSection.showtimes)}/> )}
+                                                                            arrayTeste={horinhas(movieSection.showtimes,idSessao)}/> )}
             </Section>) }
 
     else{
@@ -33,32 +36,27 @@ export default function DataSelection(props){
         )}
 }
 
-
 function FilmSection(props){
     return(
         <div className="movie-section">
                 <p> {props.weekday} - {props.date} </p>
-
                 <div className="show-times">
                     {props.arrayTeste}
-                    {/* {props.arrayTeste} */}
-                    {/* {arrayShowTimes.map( showtime => <Article showtimes={showtime.name}/>)} */}
                 </div>
             </div>)
 }
 
-function horinhas(showtimes){
+function horinhas(showtimes,idSessao){
     const horasDisponiveis = showtimes; 
     return(
         <>
-            {horasDisponiveis.map( horadisponivel => <Article   showtimes={horadisponivel.name}
-                                                                setNextScreen={props.setNextScreen}/>)}
+            {horasDisponiveis.map( horadisponivel => <Link to={`/assentos/${idSessao = horadisponivel.id}`}> <Article   showtimes={horadisponivel.name} /> </Link> )}
         </>)
 }
 
 function Article(props){
     return(
-        <article onClick={props.setNextScreen}> {props.showtimes} </article>  )
+        <article> {props.showtimes} </article>  )
 }
 
 const Section = styled.section`

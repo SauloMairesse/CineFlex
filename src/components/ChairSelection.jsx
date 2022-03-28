@@ -78,7 +78,6 @@ export default function ChairSelection(){
 let array =[]
 
 function Button(props){
-
     return(
         <button onClick={ (e) =>    
             {                       if(e.target.className === 'true'){
@@ -86,7 +85,7 @@ function Button(props){
                                     array.push(e.target.id)
                                     console.log(array)}
                                     else if(e.target.className === 'selecionado'){
-                                        array.filter(umaCadeira => umaCadeira !== e.target.id)
+                                        array = array.filter( value => value !== e.target.id)
                                         console.log(array)
                                         e.target.className = 'true'}
                                     else{alert('NÃO SENTÁRAS NA CADEIRA DOS OUTROS, IRMÃO !')}

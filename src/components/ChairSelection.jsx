@@ -58,6 +58,7 @@ export default function ChairSelection(){
                         <span>CPF do Comprador</span>
                         <input type="text" value={userCPF} placeholder={'Digite seu CPF'} onChange={ (a) => setUserCPF(a.target.value)} />
                     </form>
+                    <button onClick={() => createObject(array, )}>Reservar assento(s)</button>
                 </Formulario>
                 <Footer>
                     <img src={chairs.movie.posterURL} />
@@ -76,14 +77,19 @@ export default function ChairSelection(){
 }
 
 let array =[]
-
+let objeto = {}
+function createObject(){
+    objeto.push = {ids: array, 
+                   name: "Fulano",
+                   cpf: "12345678900"}
+    console.log(objeto)
+}
 function Button(props){
     return(
         <button onClick={ (e) =>    
             {                       if(e.target.className === 'true'){
                                     e.target.className = 'selecionado'
-                                    array.push(e.target.id)
-                                    console.log(array)}
+                                    array.push(e.target.id)}
                                     else if(e.target.className === 'selecionado'){
                                         array = array.filter( value => value !== e.target.id)
                                         console.log(array)
@@ -124,6 +130,22 @@ const Formulario = styled.section`
         color: #293845;
         margin-bottom: 10px;
     }
+    button{
+            width: 225px;
+            height: 42px;
+            border: none;
+            background: #E8833A;
+            border-radius: 3px;
+            margin-top: 100px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 21px;
+            letter-spacing: 0.04em;
+            color: #FFFFFF;
+            margin-bottom: 200px;
+        }
 `;
 
 const Section = styled.section`

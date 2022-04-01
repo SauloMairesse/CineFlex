@@ -13,8 +13,6 @@ export default function ChairSelection(){
     const [userName, setUserName] = React.useState('');
     const [userCPF, setUserCPF] = React.useState('')
 
-    const [cadeiras, setCadeiras] = React.useState([]);
-
     useEffect( () => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
         promise.then( (response) => {
@@ -33,7 +31,7 @@ export default function ChairSelection(){
                                                             isAvailable={`${chair.isAvailable}`}
                                                             chairID={chair.name}/>)}
                     </div>
-                    <span className="selected">
+                    <span>
                         <div className="example">
                             <Button name={''}
                                     isAvailable={'selecionado'}/>
@@ -58,7 +56,7 @@ export default function ChairSelection(){
                         <span>CPF do Comprador</span>
                         <input type="text" value={userCPF} placeholder={'Digite seu CPF'} onChange={ (a) => setUserCPF(a.target.value)} />
                     </form>
-                    <button onClick={() => createObject(array, )}>Reservar assento(s)</button>
+                    <button onClick={() => createObject(choicenSeats, )}>Reservar assento(s)</button>
                 </Formulario>
                 <Footer>
                     <img src={chairs.movie.posterURL} />
@@ -76,28 +74,29 @@ export default function ChairSelection(){
         )}
 }
 
-let array =[]
+let choicenSeats =[]
 let objeto = {}
+
 function createObject(){
-    objeto.push = {ids: array, 
-                   name: "Fulano",
-                   cpf: "12345678900"}
-    console.log(objeto)
+    objeto.push = {ids: choicenSeats, 
+                   name: "teste",
+                   cpf: "00000000000"}
 }
 function Button(props){
     return(
         <button onClick={ (e) =>    
             {                       if(e.target.className === 'true'){
                                     e.target.className = 'selecionado'
-                                    array.push(e.target.id)}
+                                    choicenSeats.push(e.target.id)
+                                    console.log(choicenSeats)}
                                     else if(e.target.className === 'selecionado'){
-                                        array = array.filter( value => value !== e.target.id)
-                                        console.log(array)
-                                        e.target.className = 'true'}
+                                        choicenSeats = choicenSeats.filter( value => value !== e.target.id)
+                                        e.target.className = 'true'
+                                        console.log(choicenSeats)}
                                     else{alert('NÃO SENTÁRAS NA CADEIRA DOS OUTROS, IRMÃO !')}
                                 }} 
                 className={props.isAvailable}
-                id={props.chairID}> {props.name} </button>
+                id = {props.chairID}> {props.name} </button>
     )
 }
 
